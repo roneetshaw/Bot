@@ -1,0 +1,26 @@
+"btc_usdt", "bch_usdt", "eth_usdt", "etc_usdt", "ltc_usdt", "dash_usdt", "zec_usdt", "xmr_usdt", "doge_usdt", "powr_btc", "hsr_btc", "neo_btc", "eth_btc", "etc_btc", "zec_btc", "dash_btc", "ltc_btc", "bch_btc", "btg_btc", "doge_btc", "xmr_btc", "btm_btc", "omg_btc", "pay_btc"
+
+btc_usdt: -0.7104665625760456% 
+ bch_usdt: -3.011476560127921% 
+ eth_usdt: -0.387596898446616% 
+ etc_usdt: -1.0049018865160064% 
+ ltc_usdt: -2.3501406577645465% 
+ dash_usdt: -2.4963472948650094% 
+ zec_usdt: -2.7221350030115175% 
+ xmr_usdt: 2.0074271747741808% 
+ doge_usdt: -3.2315978456014327% 
+ powr_btc: -3.658271819366033% 
+ hsr_btc: -3.3030216844872538% 
+ neo_btc: -1.0627581120944036% 
+ eth_btc: -0.5677882862464261% 
+ etc_btc: -1.4250607642682644% 
+ zec_btc: 0% 
+ dash_btc: -2.0332400479753194% 
+ ltc_btc: -1.1764705882352868% 
+ bch_btc: 0.27198549410698564% 
+ btg_btc: -3101.4672050708673% 
+ doge_btc: -1.3513513513513526% 
+ xmr_btc: -0.6859747110082188% 
+ btm_btc: -6.532935754947137% 
+ omg_btc: -1.6501570573304527% 
+ pay_btc: 0.23659305993689292% 
