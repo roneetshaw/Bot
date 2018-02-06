@@ -13,6 +13,21 @@
 	function transpose($array) {
 		return array_map(null, ...$array);
 	}
+	
+	function getPriceFormat($price)
+	{
+		if($price == 0)
+		{
+			$price=' ';
+		}
+		else
+		{
+		$price=(string)(number_format(((float)((string)($price))),5,'.','')."$");
+		return $price;
+		}
+	}
+	
+	
 	function getYobitbalance($yo)
 	{
 		return json_encode($yo->getTradeInfo());
@@ -61,6 +76,25 @@
 	{
 		return json_encode($kraken->QueryPublic('Ticker', array('pair' => $pair)));
 	}
+	function currentValuefetcher($pair,$crypotia,$binance)
+		{
+			
+			$pair_gate=strtolower($pair) ;
+			$json_gate=json_decode(getGateIOTicker($pair_gate),true);
+			$json_gate_btc=getPriceFormat($json_gate['lowestAsk']);
+			//print_r($json_gate_btc);
+			$json_crypto=json_decode(GetCryptoTicker($crypotia,$pair),true);
+			$json_crypto_btc=getPriceFormat($json_crypto['Data']['AskPrice']);
+			//print_r($json_crypto['Data']['AskPrice']);
+			$pair_binance = str_replace('_', '', $pair);
+			$json_binance=json_decode(GetBinanceTicker($binance,$pair_binance),true);
+			
+			$json_binance_btc=getPriceFormat($json_binance['asks']['0']['0']);
+			$a = array($pair,$json_binance_btc,$json_crypto_btc,$json_gate_btc);
+			//$x=json_encode($a);
+			//print_r($a);
+			return $a;
+		}
 	if($type=="1")
 	{
 		$query_type = mysqli_real_escape_string($db,$_POST['query_type']);
@@ -92,6 +126,37 @@
 			}
 		}
 	}
+	 
+	else if($type=="gate_btc")
+		
+	{
+		
+		$pair = mysqli_real_escape_string($db,$_POST['pair']);
+		//print_r($pair);
+		$pairArray = explode(',', $pair);
+		//print_r($pairArray);
+		$length=count($pairArray);
+		$CurrencyArray=array();
+		for($p = 0; $p < $length; $p++) 
+		{
+			
+				
+				$pair = (string)($pairArray[$p]);
+				 array_push($CurrencyArray,currentValuefetcher($pair,$crypotia,$binance));
+				//print_r($pair_gate);
+		
+		}
+		$x=json_encode($CurrencyArray);
+		print_r($x);
+			return $x;
+		
+	
+		
+		
+		
+		
+	}
+	
 	else if($type=="2")
 	{
 		$sql12="SELECT Exchange_Id,ExchangeName,Status,CreatedDate FROM EXCHANGE_MASTER";

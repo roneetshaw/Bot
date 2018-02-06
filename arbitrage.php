@@ -44,7 +44,9 @@
                             </div>
                             <div class="content">
                                 <div class="row" style="margin:20px;">
-									<table id="commonCurrDisplay" class="table table-condensed table-hover" width="100%"></table>
+									<table id="commonCurrDisplay" class="table table-condensed table-hover" width="100%">
+											
+									</table>
 								</div>
                             </div>
                         </div>
@@ -59,14 +61,15 @@
 	<script type="text/javascript">
 		
     	$(document).ready(function(){
-			initTable();
+			// initTable();
+			consoleGate();
 			
 			function initTable()
 			{
 				$.ajax({ 
 					url: 'webmethods.php',
 					type: 'POST',
-					data: {type: 2 },
+					data: {type: "2" },
 					success: function (data1) {
 						var arr = JSON.parse(data1);
 						fillCurrTable(arr);
@@ -76,26 +79,47 @@
 					}
 				});
 			}
+			function consoleGate()
+			{
+				$.ajax({ 
+					url: 'webmethods.php',
+					type: 'POST',
+					data: {type: "gate_btc",
+					pair:"BTC_USDT,LTC_USDT,ETH_USDT,NEO_USDT"
+						
+					},
+					success: function (data1) {
+						console.log(data1);
+						var arr = JSON.parse(data1);
+						fillCurrTable(arr);
+					},
+					error: function (log) {
+						console.log(log);
+					}
+				});
+			}
+			
 			
 			function fillCurrTable(dataSet)
 			{
 				$('#commonCurrDisplay').DataTable( {
 					data: dataSet,
-					dom: 'Bfrtip',
 					buttons: [
 						'pdf'
 					],
 					destroy: true,
-					columns: [
-						{ title: "Currency" },
-						{ title: "Binance" },
-						{ title: "Crytopia" },
-						{ title: "Gate" }
-					]
+					 columns: [
+						 { title : "Currency" } ,
+						{  title : "Binance" }, 
+						{ title :  "Crytopia" },
+						{ title :  "Gate" }	
+							]
 				});
 			}
 			
     	});
+		 
+		
 	</script>
 
 </html>
